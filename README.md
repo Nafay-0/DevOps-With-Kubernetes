@@ -1,2 +1,14 @@
 # DevOps-With-Kubernetes
-Github Repo for the solutions for Course DevOps-With-Kubernetes
+GitHub repo containing solutions for the **DevOps with Kubernetes** course.
+
+## Chapter 2
+
+## Exercises
+
+### Exercise 1.1 — Getting started
+
+- **Solution Submission**: [1.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.1)
+- **Log output**:
+
+![Log Output](LogOutput/output.png)
+
