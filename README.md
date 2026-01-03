@@ -12,3 +12,10 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
 ![Log Output](LogOutput/output.png)
 
+
+### Exercise 1.2. The project, step 1
+
+- **Solution Submission**: [1.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.2)
+- **Log output**:
+
+![Log Output](ToDoApp/output.png)
