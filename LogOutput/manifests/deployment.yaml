@@ -13,10 +13,24 @@ spec:
         app: hashgenerator
     spec:
       containers:
-        - name: hashgenerator
+        - name: writer
           image: logoutput:1
           imagePullPolicy: IfNotPresent
+          command: ["python", "writer.py"]
+          volumeMounts:
+            - name: shared-volume
+              mountPath: /shared
+        - name: reader
+          image: logoutput:1
+          imagePullPolicy: IfNotPresent
+          command: ["python", "reader.py"]
           ports:
             - name: http
               containerPort: 8000
               protocol: TCP
+          volumeMounts:
+            - name: shared-volume
+              mountPath: /shared
+      volumes:
+        - name: shared-volume
+          emptyDir: {}
