@@ -34,3 +34,10 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - **Solution Submission**: [1.4](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.4)
 - **Log output**:
     No screenshot available. Only the manifests/deployment.yaml file is available.
+
+### Exercise 1.5. The project, step3
+
+- **Solution Submission**: [1.5](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.5)
+- **Log output**:
+- ![Log Output](LogOutput/1.5out.png)
+   
