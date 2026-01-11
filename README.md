@@ -39,11 +39,20 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
 - **Solution Submission**: [1.5](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.5)
 - **Log output**:
-- ![Log Output](LogOutput/1.5out.png)
+- ![Log Output](ToDoApp/1.5out.png)
    
 
 ### Exercise 1.6. The project, step4
 
 - **Solution Submission**: [1.6](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.6)
 - **Log output**:
-- ![Log Output](LogOutput/1.6out.png)
+- ![Log Output](ToDoApp/1.6out.png)
+
+
+### Exercise 1.7. External access with Ingress
+
+- **Solution Submission**: [1.7](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.7)
+- **Log output**:
+- ![Log Output](LogOutput/1.7out.png)
+
+
