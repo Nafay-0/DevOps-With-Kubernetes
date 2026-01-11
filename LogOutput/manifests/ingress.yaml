@@ -7,6 +7,23 @@ spec:
     - host: logoutput.local
       http:
         paths:
+          # PingPong application on /pingpong path
+          - path: /pingpong
+            pathType: Prefix
+            backend:
+              service:
+                name: pingpong-service
+                port:
+                  number: 80
+          # LogOutput status endpoint
+          - path: /status
+            pathType: Prefix
+            backend:
+              service:
+                name: logoutput-service
+                port:
+                  number: 80
+          # LogOutput root endpoint
           - path: /
             pathType: Prefix
             backend:
