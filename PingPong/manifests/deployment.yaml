@@ -20,3 +20,10 @@ spec:
             - name: http
               containerPort: 8000
               protocol: TCP
+          volumeMounts:
+            - name: shared-storage
+              mountPath: /shared
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: shared-storage-pvc
