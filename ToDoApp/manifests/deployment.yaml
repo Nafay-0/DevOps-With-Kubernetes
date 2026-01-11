@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-app-dep
+  name: todo-app
 spec:
   replicas: 1
   selector:
@@ -14,5 +14,8 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: todo-app:1
+          image: todo-app:latest
           imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "8000"
