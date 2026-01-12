@@ -33,5 +33,4 @@ spec:
               mountPath: /shared
       volumes:
         - name: shared-volume
-          persistentVolumeClaim:
-            claimName: shared-storage-pvc
+          emptyDir: {}
