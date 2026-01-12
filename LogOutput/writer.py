@@ -15,8 +15,8 @@ def now_timestamp() -> str:
 
 # File path in shared volume (only for log output, not for pingpong count)
 LOG_FILE = "/shared/log.txt"
-# PingPong service URL (using namespace: service-name.namespace)
-PINGPONG_SERVICE_URL = "http://pingpong-service.exercises:80"
+# PingPong service URL from environment variable
+PINGPONG_SERVICE_URL = os.getenv("PINGPONG_SERVICE_URL", "http://pingpong-service.exercises:80")
 
 def get_pingpong_count():
     """Get ping-pong counter via HTTP from PingPong service"""

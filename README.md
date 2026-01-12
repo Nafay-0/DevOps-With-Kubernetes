@@ -115,3 +115,6 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - **Solution Submission**: [2.5](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.5)
 - **Log output**:
 - ![Log Output](LogOutput/2.5out.png)
+
+### Exercise 2.6: The project, step 10
+- **Solution Submission**: [2.6](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.6)

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logoutput-pingpong-config
+  namespace: exercises
+data:
+  PINGPONG_SERVICE_URL: "http://pingpong-service.exercises:80"
+  PORT: "8000"

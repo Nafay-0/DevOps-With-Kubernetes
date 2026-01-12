@@ -23,7 +23,15 @@ spec:
               protocol: TCP
           env:
             - name: PORT
-              value: "8000"
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-app-config
+                  key: PORT
+            - name: BACKEND_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-app-config
+                  key: BACKEND_URL
           volumeMounts:
             - name: image-cache
               mountPath: /cache

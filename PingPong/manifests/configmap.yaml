@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pingpong-config
+  namespace: exercises
+data:
+  PORT: "8000"

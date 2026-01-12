@@ -24,6 +24,11 @@ spec:
                 configMapKeyRef:
                   name: logoutput-config
                   key: MESSAGE
+            - name: PINGPONG_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: logoutput-pingpong-config
+                  key: PINGPONG_SERVICE_URL
           volumeMounts:
             - name: shared-volume
               mountPath: /shared
@@ -37,6 +42,12 @@ spec:
             - name: http
               containerPort: 8000
               protocol: TCP
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: logoutput-pingpong-config
+                  key: PORT
           volumeMounts:
             - name: shared-volume
               mountPath: /shared

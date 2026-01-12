@@ -93,6 +93,8 @@ async def get_image():
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
+    # Get backend URL from environment variable
+    backend_url = os.getenv("BACKEND_URL", "http://todo-backend.local")
     html_content = """
     <!DOCTYPE html>
     <html>
@@ -204,12 +206,8 @@ async def root():
             const sendButton = document.getElementById('send-button');
             const todoList = document.getElementById('todo-list');
             
-            // Backend service URL
-            // Try to detect if we're accessing via localhost (port-forward) or via Ingress
-            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-            const BACKEND_URL = isLocalhost 
-                ? 'http://localhost:3006'  // Port-forwarded backend
-                : 'http://todo-backend.local';  // Ingress backend
+            // Backend service URL from server configuration
+            const BACKEND_URL = '{backend_url}';
 
             // Load todos from backend
             async function loadTodos() {
@@ -314,7 +312,7 @@ async def root():
         </script>
     </body>
     </html>
-    """
+    """.format(backend_url=backend_url)
     return html_content
 
 
