@@ -74,3 +74,16 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - **Solution Submission**: [1.10](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.10)
 - **Log output**:
 - ![Log Output](LogOutput/1.10out.png)
+
+### Exercise 1.11. Persisting data
+
+- **Solution Submission**: [1.11](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.11)
+- **Log output**:
+- ![Log Output](LogOutput/1.11out.png)
+- ![Log Output](PingPong/1.11out.png)
+
+### Exercise 1.12. The project, step 6
+
+- **Solution Submission**: [1.12](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/1.12)
+- **Log output**:
+- ![Log Output](ToDoApp/1.12out.png)
