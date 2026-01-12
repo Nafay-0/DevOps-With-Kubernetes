@@ -27,3 +27,28 @@ spec:
                 configMapKeyRef:
                   name: todo-backend-config
                   key: PORT
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-backend-config
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-backend-config
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-backend-config
+                  key: DB_NAME
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-backend-config
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: todo-backend-secret
+                  key: DB_PASSWORD

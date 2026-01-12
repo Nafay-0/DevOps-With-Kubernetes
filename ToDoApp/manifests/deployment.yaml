@@ -32,6 +32,11 @@ spec:
                 configMapKeyRef:
                   name: todo-app-config
                   key: BACKEND_URL
+            - name: BACKEND_INTERNAL_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-app-config
+                  key: BACKEND_INTERNAL_URL
           volumeMounts:
             - name: image-cache
               mountPath: /cache

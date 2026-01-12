@@ -124,3 +124,8 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - **Log output**:
 - ![Log Output](PingPong/2.7out.png)
 - ![Log Output](ToDoApp/2.7out.png)
+
+### Exercise 2.8: The project, step 11
+- **Solution Submission**: [2.8](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.8)
+- **Log output**:
+- ![Log Output](ToDoApp/2.8out.png)

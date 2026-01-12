@@ -4,13 +4,17 @@ import sys
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 import requests
+from starlette.concurrency import run_in_threadpool
 
 load_dotenv()
 
 app = FastAPI(title="ToDo App v1.0")
+
+# Backend (internal) URL for server-side proxying (must be provided via env/config)
+BACKEND_INTERNAL_URL = os.getenv("BACKEND_INTERNAL_URL", "").rstrip("/")
 
 # Cache directory in volume
 CACHE_DIR = "/cache"
@@ -312,8 +316,59 @@ async def root():
         </script>
     </body>
     </html>
-    """.format(backend_url=backend_url)
-    return html_content
+    """.replace("{backend_url}", backend_url)
+    return HTMLResponse(content=html_content)
+
+
+@app.get("/api/todos")
+async def api_get_todos():
+    """
+    Browser-safe endpoint: same-origin API that proxies to the actual todo-backend service inside the cluster.
+    """
+    if not BACKEND_INTERNAL_URL:
+        return JSONResponse(
+            status_code=500,
+            content={"error": "BACKEND_INTERNAL_URL is not configured"},
+        )
+
+    def _do_request():
+        r = requests.get(f"{BACKEND_INTERNAL_URL}/todos", timeout=5)
+        return r.status_code, r.text, r.headers.get("content-type", "")
+
+    status, text, content_type = await run_in_threadpool(_do_request)
+    # best-effort JSON passthrough
+    if "application/json" in (content_type or ""):
+        try:
+            return JSONResponse(status_code=status, content=__import__("json").loads(text))
+        except Exception:
+            pass
+    return JSONResponse(status_code=status, content={"raw": text})
+
+
+@app.post("/api/todos")
+async def api_create_todo(req: Request):
+    """
+    Browser-safe endpoint: same-origin API that proxies POSTs to the actual todo-backend service inside the cluster.
+    """
+    if not BACKEND_INTERNAL_URL:
+        return JSONResponse(
+            status_code=500,
+            content={"error": "BACKEND_INTERNAL_URL is not configured"},
+        )
+
+    body = await req.json()
+
+    def _do_request():
+        r = requests.post(f"{BACKEND_INTERNAL_URL}/todos", json=body, timeout=5)
+        return r.status_code, r.text, r.headers.get("content-type", "")
+
+    status, text, content_type = await run_in_threadpool(_do_request)
+    if "application/json" in (content_type or ""):
+        try:
+            return JSONResponse(status_code=status, content=__import__("json").loads(text))
+        except Exception:
+            pass
+    return JSONResponse(status_code=status, content={"raw": text})
 
 
 def signal_handler(sig, frame):

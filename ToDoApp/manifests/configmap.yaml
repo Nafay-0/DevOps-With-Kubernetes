@@ -4,5 +4,8 @@ metadata:
   name: todo-app-config
   namespace: project
 data:
-  BACKEND_URL: "http://todo-backend.local"
+  # Browser calls same-origin API on the todo-app, which proxies to the backend
+  BACKEND_URL: "/api"
+  # Internal cluster URL (used by todo-app server-side proxy)
+  BACKEND_INTERNAL_URL: "http://todo-backend-service.project:80"
   PORT: "8000"
