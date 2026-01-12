@@ -93,5 +93,7 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - **Log output**:
 - ![Log Output](ToDoApp/1.13out.png)
 
+## Chapter 3
+
 ### Exercise 2.1 Connecting pods
 - **Solution Submission**: [2.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.1)
