@@ -106,3 +106,7 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
 ### Exercise 2.3. Keep them separated
 - **Solution Submission**: [2.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.3)
+
+
+### Exercise 2.4. The project, step 9
+- **Solution Submission**: [2.4](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.4)
