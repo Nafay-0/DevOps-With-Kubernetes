@@ -30,11 +30,33 @@ def get_pingpong_count():
         print(f"Error fetching ping-pong count: {e}", flush=True)
         return 0
 
+# ConfigMap file path
+CONFIG_FILE = "/config/information.txt"
+
+def read_config_file():
+    """Read content from ConfigMap file"""
+    try:
+        if os.path.exists(CONFIG_FILE):
+            with open(CONFIG_FILE, "r") as f:
+                return f.read().strip()
+        return ""
+    except Exception as e:
+        print(f"Error reading config file: {e}", flush=True)
+        return ""
+
 # Generate random string on startup
 stored_value = generate_random_string()
 
 # Write to file every 5 seconds
 if __name__ == "__main__":
+    # Read ConfigMap values once at startup
+    config_file_content = read_config_file()
+    message_env = os.getenv("MESSAGE", "")
+    
+    # Print ConfigMap values
+    print(f"file content: {config_file_content}", flush=True)
+    print(f"env variable: MESSAGE={message_env}", flush=True)
+    
     while True:
         pingpong_count = get_pingpong_count()
         # Format: ISO timestamp with Z: random_string.\nPing / Pongs: count

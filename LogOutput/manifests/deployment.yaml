@@ -18,9 +18,17 @@ spec:
           image: logoutput:1
           imagePullPolicy: IfNotPresent
           command: ["python", "writer.py"]
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: logoutput-config
+                  key: MESSAGE
           volumeMounts:
             - name: shared-volume
               mountPath: /shared
+            - name: config-volume
+              mountPath: /config
         - name: reader
           image: logoutput:1
           imagePullPolicy: IfNotPresent
@@ -35,3 +43,6 @@ spec:
       volumes:
         - name: shared-volume
           emptyDir: {}
+        - name: config-volume
+          configMap:
+            name: logoutput-config

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logoutput-config
+  namespace: exercises
+data:
+  information.txt: |
+    this text is from file
+  MESSAGE: hello world

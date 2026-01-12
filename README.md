@@ -110,3 +110,8 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
 ### Exercise 2.4. The project, step 9
 - **Solution Submission**: [2.4](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.4)
+
+### Exercise 2.5. Documentation and ConfigMaps
+- **Solution Submission**: [2.5](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.5)
+- **Log output**:
+- ![Log Output](LogOutput/2.5out.png)
