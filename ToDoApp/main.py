@@ -104,15 +104,11 @@ async def root():
                 max-width: 800px;
                 margin: 50px auto;
                 padding: 20px;
+                background-color: #f9f9f9;
             }
             h1 {
                 color: #333;
-            }
-            .todo-item {
-                padding: 10px;
-                margin: 5px 0;
-                background-color: #f5f5f5;
-                border-left: 3px solid #4CAF50;
+                text-align: center;
             }
             .image-container {
                 margin: 20px 0;
@@ -124,6 +120,59 @@ async def root():
                 border-radius: 8px;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             }
+            .input-container {
+                display: flex;
+                gap: 10px;
+                margin: 20px 0;
+            }
+            #todo-input {
+                flex: 1;
+                padding: 12px;
+                border: 2px solid #ddd;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+            #todo-input:focus {
+                outline: none;
+                border-color: #4CAF50;
+            }
+            #char-count {
+                font-size: 12px;
+                color: #666;
+                margin-top: 5px;
+            }
+            #char-count.warning {
+                color: #ff6b6b;
+            }
+            .send-button {
+                padding: 12px 30px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .send-button:hover {
+                background-color: #45a049;
+            }
+            .send-button:disabled {
+                background-color: #cccccc;
+                cursor: not-allowed;
+            }
+            .todo-list {
+                margin-top: 30px;
+            }
+            .todo-item {
+                padding: 15px;
+                margin: 10px 0;
+                background-color: white;
+                border-left: 4px solid #4CAF50;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                word-wrap: break-word;
+            }
         </style>
     </head>
     <body>
@@ -131,9 +180,58 @@ async def root():
         <div class="image-container">
             <img src="/image" alt="Random image from Lorem Picsum" />
         </div>
-        <div class="todo-item">Sample todo item 1</div>
-        <div class="todo-item">Sample todo item 2</div>
-        <div class="todo-item">Sample todo item 3</div>
+        
+        <div class="input-container">
+            <div style="flex: 1;">
+                <input 
+                    type="text" 
+                    id="todo-input" 
+                    placeholder="Enter a new todo (max 140 characters)" 
+                    maxlength="140"
+                />
+                <div id="char-count">0 / 140</div>
+            </div>
+            <button class="send-button" id="send-button">Create TODO</button>
+        </div>
+
+        <div class="todo-list">
+            <div class="todo-item">TODO 1: Learn Kubernetes basics</div>
+            <div class="todo-item">TODO 2: Deploy applications to k3d cluster</div>
+            <div class="todo-item">TODO 3: Implement persistent volumes</div>
+            <div class="todo-item">TODO 4: Configure Ingress routing</div>
+            <div class="todo-item">TODO 5: Add image caching feature</div>
+        </div>
+
+        <script>
+            const todoInput = document.getElementById('todo-input');
+            const charCount = document.getElementById('char-count');
+            const sendButton = document.getElementById('send-button');
+
+            // Update character count
+            todoInput.addEventListener('input', function() {
+                const length = this.value.length;
+                charCount.textContent = length + ' / 140';
+                
+                if (length > 120) {
+                    charCount.classList.add('warning');
+                } else {
+                    charCount.classList.remove('warning');
+                }
+
+                // Disable button if input is empty or too long
+                sendButton.disabled = length === 0 || length > 140;
+            });
+
+            // Button click handler (no functionality yet)
+            sendButton.addEventListener('click', function() {
+                if (todoInput.value.trim()) {
+                    alert('Send functionality not implemented yet!\\nTodo: ' + todoInput.value);
+                }
+            });
+
+            // Initial state
+            sendButton.disabled = true;
+        </script>
     </body>
     </html>
     """
