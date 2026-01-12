@@ -5,3 +5,8 @@ metadata:
   namespace: exercises
 data:
   PORT: "8000"
+  DB_HOST: "postgres-service.exercises"
+  DB_PORT: "5432"
+  DB_NAME: "pingpongdb"
+  DB_USER: "pingponguser"
+  DB_PASSWORD: "pingpongpass"

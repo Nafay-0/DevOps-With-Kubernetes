@@ -118,3 +118,9 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
 ### Exercise 2.6: The project, step 10
 - **Solution Submission**: [2.6](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.6)
+
+### Exercise 2.7: Stateful applications
+- **Solution Submission**: [2.7](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.7)
+- **Log output**:
+- ![Log Output](PingPong/2.7out.png)
+- ![Log Output](ToDoApp/2.7out.png)

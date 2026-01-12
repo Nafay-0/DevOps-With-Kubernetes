@@ -1,5 +1,6 @@
 FROM python:3.12-slim
 WORKDIR /app
-RUN pip install fastapi uvicorn
+RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+RUN pip install fastapi uvicorn psycopg2-binary
 COPY main.py .
 CMD ["python", "main.py"]

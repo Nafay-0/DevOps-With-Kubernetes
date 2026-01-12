@@ -27,3 +27,28 @@ spec:
                 configMapKeyRef:
                   name: pingpong-config
                   key: PORT
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-config
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-config
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-config
+                  key: DB_NAME
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-config
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-config
+                  key: DB_PASSWORD
