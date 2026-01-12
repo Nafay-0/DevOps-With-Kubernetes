@@ -104,5 +104,5 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - ![Log Output](ToDoApp/2.2out.png)
 
 
-### Exercise 2.3 The project, step 9
+### Exercise 2.3. Keep them separated
 - **Solution Submission**: [2.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.3)
