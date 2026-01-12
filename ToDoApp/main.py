@@ -194,18 +194,88 @@ async def root():
             <button class="send-button" id="send-button">Create TODO</button>
         </div>
 
-        <div class="todo-list">
-            <div class="todo-item">TODO 1: Learn Kubernetes basics</div>
-            <div class="todo-item">TODO 2: Deploy applications to k3d cluster</div>
-            <div class="todo-item">TODO 3: Implement persistent volumes</div>
-            <div class="todo-item">TODO 4: Configure Ingress routing</div>
-            <div class="todo-item">TODO 5: Add image caching feature</div>
+        <div class="todo-list" id="todo-list">
+            <!-- Todos will be loaded here -->
         </div>
 
         <script>
             const todoInput = document.getElementById('todo-input');
             const charCount = document.getElementById('char-count');
             const sendButton = document.getElementById('send-button');
+            const todoList = document.getElementById('todo-list');
+            
+            // Backend service URL
+            // Try to detect if we're accessing via localhost (port-forward) or via Ingress
+            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const BACKEND_URL = isLocalhost 
+                ? 'http://localhost:3006'  // Port-forwarded backend
+                : 'http://todo-backend.local';  // Ingress backend
+
+            // Load todos from backend
+            async function loadTodos() {
+                try {
+                    const response = await fetch(`${BACKEND_URL}/todos`);
+                    const data = await response.json();
+                    renderTodos(data.todos || []);
+                } catch (error) {
+                    console.error('Error loading todos:', error);
+                    todoList.innerHTML = '<div class="todo-item">Error loading todos. Please refresh the page.</div>';
+                }
+            }
+
+            // Render todos in the UI
+            function renderTodos(todos) {
+                if (todos.length === 0) {
+                    todoList.innerHTML = '<div class="todo-item">No todos yet. Create your first todo!</div>';
+                    return;
+                }
+                
+                todoList.innerHTML = todos.map((todo, index) => 
+                    `<div class="todo-item">${index + 1}. ${escapeHtml(todo)}</div>`
+                ).join('');
+            }
+
+            // Escape HTML to prevent XSS
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // Create a new todo
+            async function createTodo() {
+                const content = todoInput.value.trim();
+                if (!content || content.length > 140) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${BACKEND_URL}/todos`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ content: content })
+                    });
+
+                    if (response.ok) {
+                        // Clear input
+                        todoInput.value = '';
+                        charCount.textContent = '0 / 140';
+                        charCount.classList.remove('warning');
+                        sendButton.disabled = true;
+                        
+                        // Reload todos
+                        await loadTodos();
+                    } else {
+                        const error = await response.json();
+                        alert('Error creating todo: ' + (error.detail || 'Unknown error'));
+                    }
+                } catch (error) {
+                    console.error('Error creating todo:', error);
+                    alert('Error creating todo. Please try again.');
+                }
+            }
 
             // Update character count
             todoInput.addEventListener('input', function() {
@@ -222,15 +292,25 @@ async def root():
                 sendButton.disabled = length === 0 || length > 140;
             });
 
-            // Button click handler (no functionality yet)
-            sendButton.addEventListener('click', function() {
+            // Button click handler
+            sendButton.addEventListener('click', async function() {
                 if (todoInput.value.trim()) {
-                    alert('Send functionality not implemented yet!\\nTodo: ' + todoInput.value);
+                    await createTodo();
+                }
+            });
+
+            // Allow Enter key to submit
+            todoInput.addEventListener('keypress', async function(e) {
+                if (e.key === 'Enter' && !sendButton.disabled) {
+                    await createTodo();
                 }
             });
 
             // Initial state
             sendButton.disabled = true;
+            
+            // Load todos on page load
+            loadTodos();
         </script>
     </body>
     </html>

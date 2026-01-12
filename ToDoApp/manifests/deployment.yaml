@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: todo-app:latest
+          image: todo-app:1
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
