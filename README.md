@@ -175,3 +175,38 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
 ### Exercise 3.8 The project, step 17
 - **Solution Submission**: [3.8](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.8)
+
+### Exercise 3.9 DBaaS vs DIY
+- **Solution Submission**: [3.9](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.9)
+
+#### Overview: DBaaS compared to a Self-Managed Database on Kubernetes
+
+The table below contrasts using a managed database service (DBaaS) with running your own database inside Kubernetes using StatefulSets and PersistentVolumeClaims.
+
+| Category | Managed Database (DBaaS, e.g. Cloud SQL) | Self-Managed (StatefulSet + PVC) |
+|--------|------------------------------------------|----------------------------------|
+| **Setup Effort** | Very fast — provisioning is mostly automated | Higher — requires configuring storage, networking, and secrets |
+| **Pricing Model** | More expensive due to management overhead | Typically cheaper, paying mainly for cluster resources |
+| **Operational Work** | Low — upgrades and patches handled by provider | High — updates and security are your responsibility |
+| **Scalability** | Straightforward — scaling via provider settings | Manual — scaling requires Kubernetes and database knowledge |
+| **Backup Strategy** | Built-in backups and point-in-time recovery | Must be implemented manually (e.g., CronJobs, Velero) |
+| **Availability** | Provided out of the box with automatic failover | Difficult — replication and failover must be designed |
+| **Disaster Recovery** | Often included with regional or cross-region options | Needs custom backup and restore solutions |
+| **Configuration Control** | Restricted to exposed settings | Full access to all database configuration options |
+| **Portability** | Tightly coupled to the cloud provider | Portable across different Kubernetes environments |
+| **Skill Requirements** | Lower — infrastructure details are abstracted away | Higher — requires solid Kubernetes and storage knowledge |
+| **Observability** | Integrated monitoring and alerting | Requires external tooling like Prometheus and Grafana |
+| **Security Setup** | TLS and encryption usually preconfigured | Certificates and encryption must be set up manually |
+
+#### Suitable Use Cases for DBaaS
+- Production systems with strict uptime requirements  
+- Small teams lacking database administration expertise  
+- Projects with tight delivery timelines  
+- Environments with compliance or auditing needs  
+
+#### Suitable Use Cases for Self-Managed Databases
+- Development or non-critical workloads  
+- Projects aiming to minimize costs  
+- Scenarios requiring fine-grained database tuning  
+- Hybrid or multi-cloud deployments  
+- Educational setups to learn Kubernetes internals  
