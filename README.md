@@ -172,3 +172,6 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
 ### Exercise 3.7 The project, step 16
 - **Solution Submission**: [3.7](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.7)
+
+### Exercise 3.8 The project, step 17
+- **Solution Submission**: [3.8](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.8)
