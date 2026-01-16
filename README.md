@@ -215,3 +215,6 @@ The table below contrasts using a managed database service (DBaaS) with running 
 - **Solution Submission**: [3.10](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.10)
 - **DB Backup**:
 - ![DB Backup](Screenshots/3.10.png)
+
+### Exercise 3.11 The project, step 19
+- **Solution Submission**: [3.11](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.11)
