@@ -4,7 +4,7 @@ metadata:
   namespace: project
   name: todo-backup-cronjob
 spec:
-  schedule: "50 47 * * *"  # Run daily at 6:47 PM UTC
+  schedule: "50 18 * * *"  # Run daily at 6:50 PM UTC
   jobTemplate:
     spec:
       template:
