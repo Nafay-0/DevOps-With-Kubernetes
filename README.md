@@ -218,3 +218,9 @@ The table below contrasts using a managed database service (DBaaS) with running 
 
 ### Exercise 3.11 The project, step 19
 - **Solution Submission**: [3.11](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.11)
+
+### Exercise 3.12 The project, step 20
+- **Solution Submission**: [3.12](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.12)
+- **ToDo App Monitoring**:
+- ![ToDo App](Screenshots/3.12_1.png)
+- ![ToDo App](Screenshots/3.12_2.png)
