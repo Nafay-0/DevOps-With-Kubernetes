@@ -146,3 +146,10 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - **Solution Submission**: [3.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.1)
 - **PingPong App**:
 - ![PingPong App](Screenshots/3.1.png)
+
+### Exercise 3.2 Back to Ingress
+- **Solution Submission**: [3.2](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.2)
+- **PingPong App**:
+- ![PingPong App](Screenshots/3.2_2.png)
+- **Log Output**:
+- ![Log Output](Screenshots/3.2_1.png)
