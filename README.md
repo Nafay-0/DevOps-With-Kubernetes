@@ -164,3 +164,8 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - **Solution Submission**: [3.5](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.5)
 - **ToDo App**:
 - ![ToDo App](Screenshots/3.5.png)
+
+### Exercise 3.6 The project, step 15
+- **Solution Submission**: [3.6](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.6)
+- **ToDo App Pipeline**:
+- ![ToDo App Pipeline](Screenshots/3.6.png)
