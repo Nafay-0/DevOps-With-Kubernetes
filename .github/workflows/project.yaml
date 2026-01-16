@@ -46,8 +46,8 @@ jobs:
       # Build and push ToDo-App
       - name: Build ToDo-App
         run: |
-          docker build -t $REGISTRY/$PROJECT_ID/todo-app:${{ github.sha }} ./ToDo-App
-          docker build -t $REGISTRY/$PROJECT_ID/todo-app:latest ./ToDo-App
+          docker build -t $REGISTRY/$PROJECT_ID/todo-app:${{ github.sha }} ./ToDoApp/app/gke
+          docker build -t $REGISTRY/$PROJECT_ID/todo-app:latest ./ToDoApp/app/gke
 
       - name: Push ToDo-App
         run: |
@@ -57,8 +57,8 @@ jobs:
       # Build and push ToDo-Backend
       - name: Build ToDo-Backend
         run: |
-          docker build -t $REGISTRY/$PROJECT_ID/todo-backend:${{ github.sha }} ./ToDo-Backend
-          docker build -t $REGISTRY/$PROJECT_ID/todo-backend:latest ./ToDo-Backend
+          docker build -t $REGISTRY/$PROJECT_ID/todo-backend:${{ github.sha }} ./ToDoApp/backend/gke
+          docker build -t $REGISTRY/$PROJECT_ID/todo-backend:latest ./ToDoApp/backend/gke
 
       - name: Push ToDo-Backend
         run: |
@@ -68,8 +68,8 @@ jobs:
       # Build and push ToDo-CronJob
       - name: Build ToDo-CronJob
         run: |
-          docker build -t $REGISTRY/$PROJECT_ID/todo-cronjob:${{ github.sha }} ./ToDo-Backend/cronjob
-          docker build -t $REGISTRY/$PROJECT_ID/todo-cronjob:latest ./ToDo-Backend/cronjob
+          docker build -t $REGISTRY/$PROJECT_ID/todo-cronjob:${{ github.sha }} ./ToDoApp/backend/gke/cronjob
+          docker build -t $REGISTRY/$PROJECT_ID/todo-cronjob:latest ./ToDoApp/backend/gke/cronjob
 
       - name: Push ToDo-CronJob
         run: |
@@ -83,7 +83,7 @@ jobs:
       # Deploy ToDo-Backend first (database dependency)
       - name: Deploy ToDo-Backend
         run: |
-          cd ToDo-Backend/manifests/gke
+          cd ToDoApp/backend/gke/manifests
           kustomize edit set image PROJECT/TODO_BACKEND=$REGISTRY/$PROJECT_ID/todo-backend:${{ github.sha }}
           kustomize edit set image PROJECT/TODO_CRONJOB=$REGISTRY/$PROJECT_ID/todo-cronjob:${{ github.sha }}
           kustomize build . | kubectl apply -f -
@@ -92,7 +92,7 @@ jobs:
       # Deploy ToDo-App
       - name: Deploy ToDo-App
         run: |
-          cd ToDo-App/manifests/gke
+          cd ToDoApp/app/gke/manifests
           kustomize edit set image PROJECT/TODO_APP=$REGISTRY/$PROJECT_ID/todo-app:${{ github.sha }}
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/todo-app-dep -n project
