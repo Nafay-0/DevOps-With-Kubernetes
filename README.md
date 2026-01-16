@@ -153,3 +153,6 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - ![PingPong App](Screenshots/3.2_2.png)
 - **Log Output**:
 - ![Log Output](Screenshots/3.2_1.png)
+
+### Exercise 3.3 To the Gateway
+- **Solution Submission**: [3.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.3)
