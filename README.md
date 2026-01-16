@@ -159,3 +159,8 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
 ### Exercise 3.4 Rewritten routing
 - **Solution Submission**: [3.4](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.4)
+
+### Exercise 3.5 The project, step 14
+- **Solution Submission**: [3.5](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.5)
+- **ToDo App**:
+- ![ToDo App](Screenshots/3.5.png)
