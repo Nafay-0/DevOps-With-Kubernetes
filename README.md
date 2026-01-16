@@ -139,3 +139,10 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 - **Solution Submission**: [2.10](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.10)
 - **Log output**:
 - ![Log Output](ToDoApp/2.10out.png)
+
+## Chapter 4
+
+### Exercise 3.1 Pingpong GKE
+- **Solution Submission**: [3.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.1)
+- **PingPong App**:
+- ![PingPong App](Screenshots/3.1.png)
