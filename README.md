@@ -156,3 +156,6 @@ GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
 ### Exercise 3.3 To the Gateway
 - **Solution Submission**: [3.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.3)
+
+### Exercise 3.4 Rewritten routing
+- **Solution Submission**: [3.4](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.4)
