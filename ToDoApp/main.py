@@ -231,10 +231,32 @@ async def root():
                     todoList.innerHTML = '<div class="todo-item">No todos yet. Create your first todo!</div>';
                     return;
                 }
-                
-                todoList.innerHTML = todos.map((todo, index) => 
-                    `<div class="todo-item">${index + 1}. ${escapeHtml(todo)}</div>`
-                ).join('');
+
+                // Accept both legacy string array and new object format
+                todoList.innerHTML = todos.map((todo, index) => {
+                    if (typeof todo === 'string') {
+                        return `<div class="todo-item">${index + 1}. ${escapeHtml(todo)}</div>`;
+                    }
+                    const checked = todo.done ? 'checked' : '';
+                    const doneClass = todo.done ? 'style="text-decoration: line-through; opacity: 0.6;"' : '';
+                    return `
+                        <div class="todo-item">
+                            <label>
+                                <input type="checkbox" data-id="${todo.id}" ${checked} />
+                                <span ${doneClass}>${index + 1}. ${escapeHtml(todo.content)}</span>
+                            </label>
+                        </div>
+                    `;
+                }).join('');
+
+                // Attach change listeners for done toggles
+                document.querySelectorAll('input[type="checkbox"][data-id]').forEach((checkbox) => {
+                    checkbox.addEventListener('change', async (e) => {
+                        const id = e.target.getAttribute('data-id');
+                        const done = e.target.checked;
+                        await updateTodo(id, done);
+                    });
+                });
             }
 
             // Escape HTML to prevent XSS
@@ -276,6 +298,27 @@ async def root():
                 } catch (error) {
                     console.error('Error creating todo:', error);
                     alert('Error creating todo. Please try again.');
+                }
+            }
+
+            // Update todo done status
+            async function updateTodo(id, done) {
+                try {
+                    const response = await fetch(`${BACKEND_URL}/todos/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ done })
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json();
+                        alert('Error updating todo: ' + (error.detail || 'Unknown error'));
+                    }
+                } catch (error) {
+                    console.error('Error updating todo:', error);
+                    alert('Error updating todo. Please try again.');
                 }
             }
 
@@ -360,6 +403,32 @@ async def api_create_todo(req: Request):
 
     def _do_request():
         r = requests.post(f"{BACKEND_INTERNAL_URL}/todos", json=body, timeout=5)
+        return r.status_code, r.text, r.headers.get("content-type", "")
+
+    status, text, content_type = await run_in_threadpool(_do_request)
+    if "application/json" in (content_type or ""):
+        try:
+            return JSONResponse(status_code=status, content=__import__("json").loads(text))
+        except Exception:
+            pass
+    return JSONResponse(status_code=status, content={"raw": text})
+
+
+@app.put("/api/todos/{todo_id}")
+async def api_update_todo(todo_id: int, req: Request):
+    """
+    Browser-safe endpoint: same-origin API that proxies PUTs to the actual todo-backend service inside the cluster.
+    """
+    if not BACKEND_INTERNAL_URL:
+        return JSONResponse(
+            status_code=500,
+            content={"error": "BACKEND_INTERNAL_URL is not configured"},
+        )
+
+    body = await req.json()
+
+    def _do_request():
+        r = requests.put(f"{BACKEND_INTERNAL_URL}/todos/{todo_id}", json=body, timeout=5)
         return r.status_code, r.text, r.headers.get("content-type", "")
 
     status, text, content_type = await run_in_threadpool(_do_request)
