@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-broadcaster-config
+  namespace: project
+data:
+  NATS_URL: "nats://my-nats.default.svc.cluster.local:4222"
+  BROADCAST_SUBJECT: "todo.events"
+  QUEUE_GROUP: "todo-broadcaster"
+  BROADCAST_URL: "http://example.com/webhook"

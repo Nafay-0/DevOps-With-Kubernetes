@@ -52,6 +52,16 @@ spec:
                 secretKeyRef:
                   name: todo-backend-secret
                   key: DB_PASSWORD
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-backend-config
+                  key: NATS_URL
+            - name: BROADCAST_SUBJECT
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-backend-config
+                  key: BROADCAST_SUBJECT
           readinessProbe:
             initialDelaySeconds: 10
             periodSeconds: 5

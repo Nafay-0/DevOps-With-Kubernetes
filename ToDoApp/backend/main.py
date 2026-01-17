@@ -7,6 +7,8 @@ import os
 import psycopg2
 import time
 import logging
+import json
+from nats.aio.client import Client as NATS
 from contextlib import contextmanager
 from typing import List
 from datetime import datetime
@@ -69,6 +71,10 @@ DB_PORT = os.getenv("DB_PORT", "5432")
 DB_NAME = os.getenv("DB_NAME", "tododb")
 DB_USER = os.getenv("DB_USER", "todouser")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+NATS_URL = os.getenv("NATS_URL", "")
+BROADCAST_SUBJECT = os.getenv("BROADCAST_SUBJECT", "todo.events")
+
+nc = None
 
 
 @contextmanager
@@ -124,6 +130,37 @@ async def startup_event():
     """Initialize database when app starts"""
     print("Initializing database connection...", flush=True)
     init_database()
+    await init_nats()
+
+
+async def init_nats():
+    """Initialize NATS connection if configured"""
+    global nc
+    if not NATS_URL:
+        logger.info("NATS_URL not set, skipping NATS connection")
+        return
+    try:
+        nc = NATS()
+        await nc.connect(servers=[NATS_URL], connect_timeout=2)
+        logger.info(f"Connected to NATS at {NATS_URL}")
+    except Exception as e:
+        logger.warning(f"Failed to connect to NATS at {NATS_URL}: {e}")
+        nc = None
+
+
+async def publish_event(event_type: str, todo: dict):
+    """Publish event to NATS (best-effort)"""
+    if not nc or not nc.is_connected:
+        return
+    payload = {
+        "type": event_type,
+        "todo": todo,
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+    }
+    try:
+        await nc.publish(BROADCAST_SUBJECT, json.dumps(payload).encode())
+    except Exception as e:
+        logger.warning(f"Failed to publish NATS event: {e}")
 
 
 class TodoCreate(BaseModel):
@@ -178,10 +215,12 @@ async def create_todo(todo: TodoCreate, request: Request):
             conn.commit()
             cur.close()
             logger.info(f"POST /todos - SUCCESS: Todo created with ID {todo_id} - Content: {todo.content.strip()}")
-            return {
+            created = {
                 "message": "Todo created successfully",
                 "todo": {"id": todo_id, "content": todo.content.strip(), "done": False},
             }
+            await publish_event("todo_created", created["todo"])
+            return created
     except Exception as e:
         logger.error(f"POST /todos - ERROR creating todo: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Error creating todo: {str(e)}")
@@ -202,7 +241,9 @@ async def update_todo(todo_id: int, update: TodoUpdate, request: Request):
                 logger.warning(f"PUT /todos/{todo_id} - NOT FOUND")
                 raise HTTPException(status_code=404, detail="Todo not found")
             logger.info(f"PUT /todos/{todo_id} - SUCCESS")
-            return {"todo": {"id": row[0], "content": row[1], "done": row[2]}}
+            updated = {"todo": {"id": row[0], "content": row[1], "done": row[2]}}
+            await publish_event("todo_updated", updated["todo"])
+            return updated
     except HTTPException:
         raise
     except Exception as e:

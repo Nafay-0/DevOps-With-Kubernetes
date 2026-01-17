@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-broadcaster
+  namespace: project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-broadcaster
+  template:
+    metadata:
+      labels:
+        app: todo-broadcaster
+    spec:
+      containers:
+        - name: todo-broadcaster
+          image: todo-broadcaster:1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-broadcaster-config
+                  key: NATS_URL
+            - name: BROADCAST_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-broadcaster-config
+                  key: BROADCAST_URL
+            - name: BROADCAST_SUBJECT
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-broadcaster-config
+                  key: BROADCAST_SUBJECT
+            - name: QUEUE_GROUP
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-broadcaster-config
+                  key: QUEUE_GROUP

@@ -9,3 +9,5 @@ data:
   DB_PORT: "5432"
   DB_NAME: "tododb"
   DB_USER: "todouser"
+  NATS_URL: "nats://my-nats.default.svc.cluster.local:4222"
+  BROADCAST_SUBJECT: "todo.events"
