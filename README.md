@@ -259,3 +259,9 @@ The table below contrasts using a managed database service (DBaaS) with running 
 - **Solution Submission**: [4.7](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.7)
 - **Output**:
 - ![Output](Screenshots/4.7.png)
+
+### Exercise 4.8: The project, step 24
+- **ArgoCD Apps**: `argocd/project-apps.yaml`
+- **Log output**:
+- ![Log Output](ToDoApp/4.8.out.png)
+
