@@ -274,7 +274,4 @@ The table below contrasts using a managed database service (DBaaS) with running 
 
 ### Exeecise 4.10: The project, the grande finale
 - **Solution Submission**: [4.10](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.10)
-- **Config Repo**: https://github.com/Nafay-0/dwk-config
-
-- 
-
+- **Config Repo**: [dwk-config](https://github.com/Nafay-0/dwk-config)
