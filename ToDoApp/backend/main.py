@@ -183,6 +183,24 @@ async def create_todo(todo: TodoCreate, request: Request):
 async def root():
     return {"message": "Todo Backend API", "endpoints": ["GET /todos", "POST /todos"]}
 
+@app.get("/healthz")
+async def healthz():
+    """Readiness/Liveness check: only OK when DB is reachable."""
+    try:
+        conn = psycopg2.connect(
+            host=DB_HOST,
+            port=DB_PORT,
+            database=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD,
+            connect_timeout=2
+        )
+        conn.close()
+        return {"status": "ok"}
+    except Exception as e:
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=500, content={"status": "db unavailable", "error": str(e)})
+
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))

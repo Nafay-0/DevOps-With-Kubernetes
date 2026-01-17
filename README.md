@@ -229,3 +229,6 @@ The table below contrasts using a managed database service (DBaaS) with running 
 - **Solution Submission**: [4.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.1)
 - **Log output**:
 - ![Log Output](LogOutput/4.1out.png)
+
+### Exercise 4.2 The project, step 21
+- **Solution Submission**: [4.2](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.2)
