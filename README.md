@@ -232,3 +232,8 @@ The table below contrasts using a managed database service (DBaaS) with running 
 
 ### Exercise 4.2 The project, step 21
 - **Solution Submission**: [4.2](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.2)
+
+### Exercise 4.3 Prometheus
+- **Solution Submission**: [4.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.3)
+- **Prometheus**:
+- ![Prometheus](Screenshots/4.3out.png)
