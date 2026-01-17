@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: pingpong-dep
+  namespace: exercises
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong
+  strategy:
+    canary:
+      steps:
+        - setWeight: 50
+        - analysis:
+            templates:
+              - templateName: pingpong-cpu-usage
+        - pause:
+            duration: 30s
+  template:
+    metadata:
+      labels:
+        app: pingpong
+    spec:
+      containers:
+        - name: pingpong
+          image: pingpong:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "8000"
+            - name: DB_HOST
+              value: "postgres-service"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "pingpongdb"
+            - name: DB_USER
+              value: "pingponguser"
+            - name: DB_PASSWORD
+              value: "pingpongpass"
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8000
