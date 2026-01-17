@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-broadcaster-config
+data:
+  LOG_ONLY: "true"
+  BROADCAST_URL: ""

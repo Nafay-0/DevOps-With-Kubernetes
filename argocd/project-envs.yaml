@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: todo-staging
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Nafay-0/DevOps-With-Kubernetes.git
+    targetRevision: main
+    path: ToDoApp/gitops/overlays/staging
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: project-staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: todo-production
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Nafay-0/DevOps-With-Kubernetes.git
+    targetRevision: refs/tags/prod
+    path: ToDoApp/gitops/overlays/production
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: project-production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

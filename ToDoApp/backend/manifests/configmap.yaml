@@ -5,7 +5,7 @@ metadata:
   namespace: project
 data:
   PORT: "8000"
-  DB_HOST: "postgres-stset-0.postgres-service.project"
+  DB_HOST: "postgres-stset-0.postgres-service"
   DB_PORT: "5432"
   DB_NAME: "tododb"
   DB_USER: "todouser"

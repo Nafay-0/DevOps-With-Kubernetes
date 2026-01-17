@@ -8,3 +8,4 @@ data:
   BROADCAST_SUBJECT: "todo.events"
   QUEUE_GROUP: "todo-broadcaster"
   BROADCAST_URL: "http://example.com/webhook"
+  LOG_ONLY: "false"

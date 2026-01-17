@@ -11,6 +11,7 @@ NATS_URL = os.getenv("NATS_URL", "")
 BROADCAST_URL = os.getenv("BROADCAST_URL", "")
 SUBJECT = os.getenv("BROADCAST_SUBJECT", "todo.events")
 QUEUE_GROUP = os.getenv("QUEUE_GROUP", "todo-broadcaster")
+LOG_ONLY = os.getenv("LOG_ONLY", "false").lower() == "true"
 
 
 def build_message(payload: dict) -> str:
@@ -29,8 +30,8 @@ async def main():
     if not NATS_URL:
         print("NATS_URL is not set, exiting", flush=True)
         sys.exit(1)
-    if not BROADCAST_URL:
-        print("BROADCAST_URL is not set, exiting", flush=True)
+    if not BROADCAST_URL and not LOG_ONLY:
+        print("BROADCAST_URL is not set and LOG_ONLY is false, exiting", flush=True)
         sys.exit(1)
 
     nc = NATS()
@@ -46,6 +47,10 @@ async def main():
 
         message = build_message(payload)
         data = {"user": "bot", "message": message}
+
+        if LOG_ONLY:
+            print(f"[LOG_ONLY] {data}", flush=True)
+            return
 
         try:
             async with session.post(BROADCAST_URL, json=data, timeout=5) as resp:

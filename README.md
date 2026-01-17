@@ -265,3 +265,9 @@ The table below contrasts using a managed database service (DBaaS) with running 
 - **Log output**:
 - ![Log Output](ToDoApp/4.8.out.png)
 
+
+### Exercise 4.9: The project, step 25
+- **Solution Submission**: [4.9](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.9)
+- **Log output**:
+- ![Log Output](ToDoApp/4.9out.png)
+

@@ -38,3 +38,8 @@ spec:
                 configMapKeyRef:
                   name: todo-broadcaster-config
                   key: QUEUE_GROUP
+            - name: LOG_ONLY
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-broadcaster-config
+                  key: LOG_ONLY
