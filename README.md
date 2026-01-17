@@ -274,8 +274,7 @@ The table below contrasts using a managed database service (DBaaS) with running 
 
 ### Exeecise 4.10: The project, the grande finale
 - **Solution Submission**: [4.10](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.10)
-- CongigRepo: https://github.com/Nafay-0/dwk-config
-### Exercise 4.10 The project, the grande finale
 - **Config Repo**: https://github.com/Nafay-0/dwk-config
-- **ArgoCD Apps**: `argocd/project-envs.yaml` (in config repo)
+
+- 
 
