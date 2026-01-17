@@ -224,3 +224,8 @@ The table below contrasts using a managed database service (DBaaS) with running 
 - **ToDo App Monitoring**:
 - ![ToDo App](Screenshots/3.12_1.png)
 - ![ToDo App](Screenshots/3.12_2.png)
+
+### Exercise 4.1 Readines probe
+- **Solution Submission**: [4.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.1)
+- **Log output**:
+- ![Log Output](LogOutput/4.1out.png)

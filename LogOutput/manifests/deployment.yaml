@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hashgenerator-dep
   namespace: exercises
+  name: hashgenerator-dep
 spec:
   replicas: 1
   selector:
@@ -13,47 +13,42 @@ spec:
       labels:
         app: hashgenerator
     spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
+        - name: config-volume
+          configMap:
+            name: logoutput-config
       containers:
-        - name: writer
-          image: logoutput:1
+        - name: log-writer
+          image: log-writer:latest
           imagePullPolicy: IfNotPresent
           command: ["python", "writer.py"]
+          volumeMounts:
+            - name: shared-log
+              mountPath: /shared
+        - name: log-reader
+          image: log-reader:latest
+          imagePullPolicy: IfNotPresent
+          command: ["python", "reader.py"]
           env:
+            - name: PORT
+              value: "8000"
+            - name: PINGPONG_URL
+              value: "http://pingpong-service.exercises:80/pings"
             - name: MESSAGE
               valueFrom:
                 configMapKeyRef:
                   name: logoutput-config
                   key: MESSAGE
-            - name: PINGPONG_SERVICE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: logoutput-pingpong-config
-                  key: PINGPONG_SERVICE_URL
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8000
           volumeMounts:
-            - name: shared-volume
+            - name: shared-log
               mountPath: /shared
             - name: config-volume
               mountPath: /config
-        - name: reader
-          image: logoutput:1
-          imagePullPolicy: IfNotPresent
-          command: ["python", "reader.py"]
-          ports:
-            - name: http
-              containerPort: 8000
-              protocol: TCP
-          env:
-            - name: PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: logoutput-pingpong-config
-                  key: PORT
-          volumeMounts:
-            - name: shared-volume
-              mountPath: /shared
-      volumes:
-        - name: shared-volume
-          emptyDir: {}
-        - name: config-volume
-          configMap:
-            name: logoutput-config

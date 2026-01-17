@@ -21,12 +21,12 @@ spec:
             name: logoutput-configmap
       containers:
         - name: log-writer
-          image: gcr.io/dwk-gke-484516/log-writer:latest
+          image: gcr.io/dwk-gke-482214/log-writer:latest
           volumeMounts:
             - name: shared-log
               mountPath: /usr/src/app/files
         - name: log-reader
-          image: gcr.io/dwk-gke-484516/log-reader:latest
+          image: gcr.io/dwk-gke-482214/log-reader:latest
           env:
             - name: PORT
               value: "8000"
@@ -37,9 +37,14 @@ spec:
                 configMapKeyRef:
                   name: logoutput-configmap
                   key: MESSAGE
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8000
           volumeMounts:
             - name: shared-log
               mountPath: /usr/src/app/files
             - name: config-volume
               mountPath: /usr/src/app/config
-

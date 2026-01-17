@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: gcr.io/dwk-gke-484516/pingpong:latest
+          image: gcr.io/dwk-gke-482214/pingpong:latest
           env:
             - name: PORT
               value: "3000"
@@ -29,3 +29,9 @@ spec:
               value: "pingpong"
             - name: DB_PASSWORD
               value: "pingpong"
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3000

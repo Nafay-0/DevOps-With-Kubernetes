@@ -127,6 +127,23 @@ async def get_pings():
 async def root():
     return {"message": "Ping Pong App - Use /pingpong endpoint"}
 
+@app.get("/healthz")
+async def healthz():
+    """Readiness probe: only ready when DB connection works."""
+    try:
+        conn = psycopg2.connect(
+            host=DB_HOST,
+            port=DB_PORT,
+            database=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD,
+            connect_timeout=2
+        )
+        conn.close()
+        return {"status": "ok"}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"status": "db unavailable", "error": str(e)})
+
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))

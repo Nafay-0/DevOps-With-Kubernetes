@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pingpong-dep
   namespace: exercises
+  name: pingpong-dep
 spec:
   replicas: 1
   selector:
@@ -15,40 +15,24 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: pingpong:1
+          image: pingpong:latest
           imagePullPolicy: IfNotPresent
-          ports:
-            - name: http
-              containerPort: 8000
-              protocol: TCP
           env:
             - name: PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: pingpong-config
-                  key: PORT
+              value: "8000"
             - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: pingpong-config
-                  key: DB_HOST
+              value: "postgres-service"
             - name: DB_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: pingpong-config
-                  key: DB_PORT
+              value: "5432"
             - name: DB_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: pingpong-config
-                  key: DB_NAME
+              value: "pingpongdb"
             - name: DB_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: pingpong-config
-                  key: DB_USER
+              value: "pingponguser"
             - name: DB_PASSWORD
-              valueFrom:
-                configMapKeyRef:
-                  name: pingpong-config
-                  key: DB_PASSWORD
+              value: "pingpongpass"
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8000

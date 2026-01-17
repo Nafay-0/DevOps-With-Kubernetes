@@ -2,12 +2,15 @@ from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse, JSONResponse
 import uvicorn
 import os
+import requests
 
 app = FastAPI(title="Log Output Reader")
 
 # File path in shared volume
 LOG_FILE = "/shared/log.txt"
 
+# PingPong service URL for readiness checks
+PINGPONG_URL = os.getenv("PINGPONG_URL") or os.getenv("PINGPONG_SERVICE_URL", "http://pingpong-service.exercises:80/pings")
 
 @app.get("/")
 async def root():
@@ -59,6 +62,17 @@ async def status_json():
             })
     except Exception as e:
         return JSONResponse(content={"error": str(e)})
+
+@app.get("/healthz")
+async def healthz():
+    """Readiness probe: only ready when PingPong is reachable."""
+    try:
+        response = requests.get(PINGPONG_URL, timeout=2)
+        if response.status_code == 200:
+            return {"status": "ok"}
+        return JSONResponse(status_code=500, content={"status": "pingpong unhealthy", "code": response.status_code})
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"status": "pingpong unreachable", "error": str(e)})
 
 
 if __name__ == "__main__":
