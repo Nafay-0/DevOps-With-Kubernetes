@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output
+  namespace: default
+  labels:
+    app: log-output
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      containers:
+        - name: log-writer
+          image: log-output-writer:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: log-files
+              mountPath: /usr/src/app/files
+        - name: log-reader
+          image: log-output-reader:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: PINGPONG_URL
+              value: "http://pingpong-svc:3000/pings"
+            - name: GREETER_URL
+              value: "http://greeter-svc:3000/greet"
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-output-config
+                  key: MESSAGE
+            - name: INFO_FILE
+              value: "/usr/src/app/config/information.txt"
+          volumeMounts:
+            - name: log-files
+              mountPath: /usr/src/app/files
+            - name: config
+              mountPath: /usr/src/app/config
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: log-files
+          emptyDir: {}
+        - name: config
+          configMap:
+            name: log-output-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: log-output-svc
+  namespace: default
+  labels:
+    app: log-output
+spec:
+  type: ClusterIP
+  selector:
+    app: log-output
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3000
+

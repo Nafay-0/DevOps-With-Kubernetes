@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-output-config
+  namespace: default
+data:
+  information.txt: |
+    content form a two line file
+  MESSAGE: "hello world"
+

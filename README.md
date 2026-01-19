@@ -289,3 +289,9 @@ The table below contrasts using a managed database service (DBaaS) with running 
 - **Solution Submission**: [5.2](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.2)
 - **Log output**:
 - ![Log Output](Chapter6/5.2out.png)
+
+### Exercise 5.3 Log app, the Service Mesh Edition
+- **Solution Submission**: [5.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.3)
+- **Log output**:
+- ![Log Output](Chapter6/5.3out.png)
+- ![Log Output](Chapter6/5.3out1.png)
