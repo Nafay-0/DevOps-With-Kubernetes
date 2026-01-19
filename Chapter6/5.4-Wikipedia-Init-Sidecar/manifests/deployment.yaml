@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wikipedia-app
+  namespace: default
+  labels:
+    app: wikipedia-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wikipedia-app
+  template:
+    metadata:
+      labels:
+        app: wikipedia-app
+    spec:
+      # Init container to fetch initial Wikipedia page
+      initContainers:
+        - name: init-fetch
+          image: wikipedia-init:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: www-content
+              mountPath: /usr/src/app/www
+      # Main container (nginx) to serve the content
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: www-content
+              mountPath: /usr/share/nginx/html
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+        # Sidecar container to periodically fetch random Wikipedia pages
+        - name: sidecar-fetch
+          image: wikipedia-sidecar:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: www-content
+              mountPath: /usr/src/app/www
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "25m"
+            limits:
+              memory: "64Mi"
+              cpu: "50m"
+      volumes:
+        - name: www-content
+          emptyDir: {}
+

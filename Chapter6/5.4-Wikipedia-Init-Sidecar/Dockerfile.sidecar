@@ -1,0 +1,11 @@
+FROM curlimages/curl:latest
+
+WORKDIR /usr/src/app
+
+# Copy and set executable permissions in one step (Docker 19.03+)
+COPY --chmod=755 sidecar-fetch.sh .
+
+ENV WWW_DIR=/usr/src/app/www
+
+CMD ["./sidecar-fetch.sh"]
+

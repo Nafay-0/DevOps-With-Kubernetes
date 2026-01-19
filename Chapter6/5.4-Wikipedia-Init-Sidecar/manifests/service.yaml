@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wikipedia-svc
+  namespace: default
+  labels:
+    app: wikipedia-app
+spec:
+  type: ClusterIP
+  selector:
+    app: wikipedia-app
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+
