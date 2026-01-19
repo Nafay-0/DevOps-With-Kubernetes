@@ -283,3 +283,9 @@ The table below contrasts using a managed database service (DBaaS) with running 
 - **Log output**:
 - ![Log Output](Chapter6/5.1out.png)
 - ![Log Output](Chapter6/5.1out1.png)
+
+
+### Exercise 5.2: Getting started with Istio service mesh
+- **Solution Submission**: [5.2](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.2)
+- **Log output**:
+- ![Log Output](Chapter6/5.2out.png)
