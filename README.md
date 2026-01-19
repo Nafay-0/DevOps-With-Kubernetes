@@ -307,3 +307,9 @@ The table below contrasts using a managed database service (DBaaS) with running 
 - **Solution Submission**: [5.6](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.6)
 - **Log output**:
 - ![Log Output](Chapter6/5.6out.png)
+
+
+### Exercise 5.7 Deploy to serverless
+- **Solution Submission**: [5.7](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.7)
+- **Log output**:
+- ![Log Output](Chapter6/5.7out.png)
