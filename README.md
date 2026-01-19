@@ -275,3 +275,11 @@ The table below contrasts using a managed database service (DBaaS) with running 
 ### Exeecise 4.10: The project, the grande finale
 - **Solution Submission**: [4.10](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.10)
 - **Config Repo**: [dwk-config](https://github.com/Nafay-0/dwk-config)
+
+### Chapter 5
+
+### Exercise 5.1: DIY CRD & Controller
+- **Solution Submission**: [5.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.1)
+- **Log output**:
+- ![Log Output](Chapter6/5.1out.png)
+- ![Log Output](Chapter6/5.1out1.png)

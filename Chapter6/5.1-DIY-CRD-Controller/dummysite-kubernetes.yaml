@@ -1,0 +1,8 @@
+apiVersion: stable.dwk/v1
+kind: DummySite
+metadata:
+  name: kubernetes-wiki
+  namespace: default
+spec:
+  website_url: "https://en.wikipedia.org/wiki/Kubernetes"
+
