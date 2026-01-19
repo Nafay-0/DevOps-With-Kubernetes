@@ -1,6 +1,49 @@
 # DevOps-With-Kubernetes
 GitHub repo containing solutions for the **DevOps with Kubernetes** course.
 
+## Quick Links (Exercises 2–5)
+
+| Exercise | Link |
+| --- | --- |
+| 2.1 | [2.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.1) |
+| 2.2 | [2.2](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.2) |
+| 2.3 | [2.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.3) |
+| 2.4 | [2.4](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.4) |
+| 2.5 | [2.5](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.5) |
+| 2.6 | [2.6](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.6) |
+| 2.7 | [2.7](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.7) |
+| 2.8 | [2.8](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.8) |
+| 2.9 | [2.9](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.9) |
+| 2.10 | [2.10](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/2.10) |
+| 3.1 | [3.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.1) |
+| 3.2 | [3.2](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.2) |
+| 3.3 | [3.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.3) |
+| 3.4 | [3.4](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.4) |
+| 3.5 | [3.5](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.5) |
+| 3.6 | [3.6](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.6) |
+| 3.7 | [3.7](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.7) |
+| 3.8 | [3.8](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.8) |
+| 3.9 | [3.9](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.9) |
+| 3.10 | [3.10](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.10) |
+| 3.11 | [3.11](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.11) |
+| 3.12 | [3.12](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/3.12) |
+| 4.1 | [4.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.1) |
+| 4.2 | [4.2](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.2) |
+| 4.3 | [4.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.3) |
+| 4.4 | [4.4](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.4) |
+| 4.5 | [4.5](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.5) |
+| 4.6 | [4.6](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.6) |
+| 4.7 | [4.7](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.7) |
+| 4.8 | [4.8](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.8) |
+| 4.9 | [4.9](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.9) |
+| 4.10 | [4.10](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/4.10) |
+| 5.1 | [5.1](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.1) |
+| 5.2 | [5.2](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.2) |
+| 5.3 | [5.3](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.3) |
+| 5.4 | [5.4](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.4) |
+| 5.6 | [5.6](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.6) |
+| 5.7 | [5.7](https://github.com/Nafay-0/DevOps-With-Kubernetes/tree/5.7) |
+
 ## Chapter 2
 
 ## Exercises
